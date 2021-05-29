@@ -9,7 +9,6 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.example.demo.exceptions.ClientTransformException;
 import com.example.demo.model.Client;
 
 class DataHandlerTest {
@@ -56,18 +55,6 @@ class DataHandlerTest {
 	}
 
 	@Test
-	void testCheckParameters() {
-		Map<String, String> result = dataHandler.checkParameters("9301205111082", "kuldeep", null);
-		assertEquals("9301205111082", result.get(DataHandler.ID));
-	}
-
-	@Test
-	void testCheckParameters_case2() {
-		Map<String, String> result = dataHandler.checkParameters(null, null, null);
-		assertEquals(0, result.size());
-	}
-	
-	@Test
 	void testGetClients() {
 		Map<String, String> ma = new HashMap<>();
 		ma.put(DataHandler.ID, "9301205111082");
@@ -83,16 +70,6 @@ class DataHandlerTest {
 		ma.put(DataHandler.FIRSTNAME, "abc");
 		List<Client> result = dataHandler.getClients(ma);
 		assertEquals(0, result.size());
-	}
-
-	@Test
-	void testValidate() {
-		dataHandler.validate("9301205111082");
-	}
-	
-	@Test
-	void testValidate_exception() {
-		assertThrows(ClientTransformException.class,() ->dataHandler.validate("1"));
 	}
 
 }
